@@ -1,23 +1,19 @@
 import pygame
 
 class Map:
-    def __init__(self, window, input_array):
-        self.window = window
+    def __init__(self, input_array):
         self.input_array = input_array
+        self.tile_size = 64
 
+        self.colorDIRT = {161, 199, 95}
+        self.colorGRASS = {163, 168, 141}
+
+    # draw the map
     def draw(self, window):
-        pos_x = 0
-        pos_y = 64
-        current_index = 0
-
-        for y in range(4):
-            pos_x = 0
-            for x in range(4):
-                if self.input_array[current_index] == 1:
-                    pygame.draw.rect(window, (0, 0, 0), (pos_x, pos_y, 64, 64))
-                else:
-                    pygame.draw.rect(window, (255, 255, 255), (pos_x, pos_y, 64, 64))
-                current_index += 1
-                pos_x += 64
-            pos_y += 64
+        for row_index, row in enumerate(self.input_array):
+            for column_index, tile in enumerate(row):
+                if tile == 1:
+                    pygame.draw.rect(window, self.colorDIRT, (column_index * self.tile_size, row_index * self.tile_size, self.tile_size, self.tile_size))
+                elif tile == 0:
+                    pygame.draw.rect(window, self.colorGRASS, (column_index * self.tile_size, row_index * self.tile_size, self.tile_size, self.tile_size))
 
