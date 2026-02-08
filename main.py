@@ -5,6 +5,7 @@
 
 import pygame
 from entity import Entity
+from map import Map
 
 pygame.init()
 
@@ -19,6 +20,7 @@ height: int = 16
 velocity: int = 10
 
 player = Entity(256, 256, 16, 16, 10)
+map1 = Map(window, [1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1])
 
 run: bool = True
 
@@ -33,6 +35,7 @@ while run == True:
     player.move()
     
     window.fill((0, 0, 0))
+    map1.draw(window)
     player.draw(window)
     pygame.display.update()
 
