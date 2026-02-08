@@ -9,8 +9,8 @@ window = pygame.display.set_mode((516,516))
 pygame.display.set_caption("On The Edges")
 
 # variables
-x: int = 32
-y: int = 32
+x: int = 256
+y: int = 256
 width: int = 16
 height: int = 16
 velocity: int = 10
@@ -27,13 +27,13 @@ while run == True:
 
     keys = pygame.key.get_pressed()
 
-    if keys[pygame.K_LEFT]:
+    if keys[pygame.K_LEFT] and x > 192:
         x -= velocity
-    if keys[pygame.K_RIGHT]:
+    if keys[pygame.K_RIGHT] and x < 320:
         x += velocity
-    if keys[pygame.K_UP]:
+    if keys[pygame.K_UP] and y > 192:
         y -= velocity
-    if keys[pygame.K_DOWN]:
+    if keys[pygame.K_DOWN] and y < 320:
         y += velocity
 
     window.fill((0, 0, 0))
