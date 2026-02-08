@@ -4,6 +4,7 @@
 # building game centered on calm gameplay in a stunning, evolving landscape
 
 import pygame
+from entity import Entity
 
 pygame.init()
 
@@ -11,11 +12,13 @@ window = pygame.display.set_mode((516,516))
 pygame.display.set_caption("On The Edges")
 
 # variables
-x: int = 256
-y: int = 256
+pos_x: int = 256
+pos_y: int = 256
 width: int = 16
 height: int = 16
 velocity: int = 10
+
+player = Entity(256, 256, 16, 16, 10)
 
 run: bool = True
 
@@ -27,19 +30,10 @@ while run == True:
         if event.type == pygame.QUIT:
             run = False
 
-    keys = pygame.key.get_pressed()
-
-    if keys[pygame.K_LEFT] and x > 192:
-        x -= velocity
-    if keys[pygame.K_RIGHT] and x < 320:
-        x += velocity
-    if keys[pygame.K_UP] and y > 192:
-        y -= velocity
-    if keys[pygame.K_DOWN] and y < 320:
-        y += velocity
-
+    player.move()
+    
     window.fill((0, 0, 0))
-    pygame.draw.rect(window, (255, 0, 0), (x, y, width, height))
+    player.draw(window)
     pygame.display.update()
 
 pygame.quit()
