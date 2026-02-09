@@ -29,7 +29,7 @@ map1 = Map([[1,0,1,0,1,0,1,0],
             [1,0,1,0,1,0,1,0],
             [0,1,0,1,0,1,0,1]])
 
-map1.set_map_from_image("map1.png")
+map1.set_map_from_image("map2.png")
 
 run: bool = True
 

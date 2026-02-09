@@ -10,7 +10,8 @@ class Map:
         self.colorDIRT = (161, 199, 95)
         self.colorGRASS = (163, 168, 141)
 
-        self.tile = Tile()
+        self.gras_tile = Tile(pygame.image.load("assets/basic_gras_tile.png"))
+        self.water_tile = Tile(pygame.image.load("assets/basic_water_tile.png"))
 
 
     # draw the map
@@ -18,9 +19,13 @@ class Map:
         for row_index, row in enumerate(self.input_array):
             for column_index, tile in enumerate(row):
                 if tile == 1:
-                    window.blit(self.tile.image, (column_index * self.tile_size, row_index * self.tile_size))
+                    window.blit(self.gras_tile.image, (240 + column_index * (self.gras_tile.width / 2) - row_index * (self.gras_tile.width / 2),
+                                                  row_index * (self.gras_tile.height / 2) + column_index * (self.gras_tile.height / 2)))
                 elif tile == 0:
-                    pygame.draw.rect(window, self.colorGRASS, (column_index * self.tile_size, row_index * self.tile_size, self.tile_size, self.tile_size))
+                    window.blit(self.water_tile.image, (240 + column_index * (self.water_tile.width / 2) - row_index * (self.water_tile.width / 2),
+                                                  row_index * (self.water_tile.height / 2) + column_index * (self.water_tile.height / 2)))
+                    
+
 
     # set a tile value to change the map
     def set_tile(self, row, col, value):
