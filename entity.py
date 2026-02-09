@@ -25,4 +25,7 @@ class Entity:
         
     def draw(self, window):
         pygame.draw.rect(window, (255, 0, 0), (self.pos_x, self.pos_y, self.width, self.height))
+
+    def get_position(self):
+        return (self.pos_x, self.pos_y)
         

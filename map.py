@@ -5,13 +5,11 @@ from tile import Tile
 class Map:
     def __init__(self, input_array):
         self.input_array = input_array
-        self.tile_size = 32
 
-        self.colorDIRT = (161, 199, 95)
-        self.colorGRASS = (163, 168, 141)
+        self.offset = (0, 0)
 
-        self.gras_tile = Tile(pygame.image.load("assets/basic_gras_tile.png"))
-        self.water_tile = Tile(pygame.image.load("assets/basic_water_tile.png"))
+        self.gras_tile = Tile("grass", pygame.image.load("assets/basic_gras_tile.png"))
+        self.water_tile = Tile("water", pygame.image.load("assets/basic_water_tile.png"))
 
 
     # draw the map
@@ -24,8 +22,6 @@ class Map:
                 elif tile == 0:
                     window.blit(self.water_tile.image, (240 + column_index * (self.water_tile.width / 2) - row_index * (self.water_tile.width / 2),
                                                   row_index * (self.water_tile.height / 2) + column_index * (self.water_tile.height / 2)))
-                    
-
 
     # set a tile value to change the map
     def set_tile(self, row, col, value):
@@ -58,4 +54,5 @@ class Map:
     
     def set_map_from_image(self, image_path):
         self.input_array = self.load_map_from_image(image_path)
+
 

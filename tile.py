@@ -1,8 +1,9 @@
 import pygame
 
 class Tile:
-    def __init__(self, image):
+    def __init__(self, type: str, image: pygame.image):
         self.title = "Basic Grass Tile"
+        self.type = type
         self.image = image
         self.width = self.image.get_width() if self.image else 0
         self.height = self.image.get_height() if self.image else 0
