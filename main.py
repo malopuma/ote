@@ -3,6 +3,7 @@
 
 import pygame
 from entity import Entity
+from player import Player
 from map import Map
 
 pygame.init()
@@ -17,7 +18,9 @@ width: int = 16
 height: int = 16
 velocity: int = 10
 
-player = Entity(256, 256, 16, 16, 10)
+clock = pygame.time.Clock()
+
+player = Player(256, 256, 8, 12, 10)
 map1 = Map([[1,0,1,0,1,0,1,0],
             [0,1,0,1,0,1,0,1],
             [1,0,1,0,1,0,1,0],
@@ -33,7 +36,7 @@ run: bool = True
 
 # game loop
 while run == True:
-    pygame.time.delay(100)
+    #pygame.time.delay(100)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -45,6 +48,8 @@ while run == True:
     map1.draw(window)
     player.draw(window)
     pygame.display.update()
+
+    clock.tick(60)
 
 pygame.quit()
 

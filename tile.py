@@ -1,7 +1,7 @@
 import pygame
 
 class Tile:
-    def __init__(self, type: str, image: pygame.image):
+    def __init__(self, type: str, image: pygame.Surface):
         self.title = "Basic Grass Tile"
         self.type = type
         self.image = image
