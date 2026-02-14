@@ -23,7 +23,7 @@ class Map:
                                                   row_index * (self.gras_tile.height / 2) + column_index * (self.gras_tile.height / 2) + self.offset[1]))
                 elif tile == 0:
                     window.blit(self.water_tile.image, (240 + column_index * (self.water_tile.width / 2) - row_index * (self.water_tile.width / 2) + self.offset[0],
-                                                  row_index * (self.water_tile.height / 2) + column_index * (self.water_tile.height / 2)))
+                                                  row_index * (self.water_tile.height / 2) + column_index * (self.water_tile.height / 2) + self.offset[1]))
 
     # set a tile value to change the map
     def set_tile(self, row, col, value):
@@ -58,13 +58,13 @@ class Map:
         self.input_array = self.load_map_from_image(image_path)
 
     def move(self, keys: ScancodeWrapper, player: player.Player):
-        if keys[pygame.K_LEFT] and player.pos_x > 192:
-            self.offset = (self.offset[0] - 10, self.offset[1])
-        if keys[pygame.K_RIGHT] and player.pos_x < 320:
-            self.offset = (self.offset[0] + 10, self.offset[1])    
-        if keys[pygame.K_UP] and player.pos_y > 192:        
-            self.offset = (self.offset[0], self.offset[1] - 10)
-        if keys[pygame.K_DOWN] and player.pos_y < 320:
+        if keys[pygame.K_LEFT] and player.pos_x < 192:
+            self.offset = (self.offset[0] + 10, self.offset[1])
+        if keys[pygame.K_RIGHT] and player.pos_x > 320:
+            self.offset = (self.offset[0] - 10, self.offset[1])    
+        if keys[pygame.K_UP] and player.pos_y < 192:        
             self.offset = (self.offset[0], self.offset[1] + 10)
+        if keys[pygame.K_DOWN] and player.pos_y > 320:
+            self.offset = (self.offset[0], self.offset[1] - 10)
         pass
 

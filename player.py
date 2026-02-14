@@ -20,13 +20,14 @@ class Player(Entity):
         self.movement_speed = movement_speed
 
     def move(self, keys: ScancodeWrapper):      
-        if keys[pygame.K_LEFT] and self.pos_x > 192:
+        if keys[pygame.K_LEFT] and self.pos_x >= 192:
             self.pos_x -= self.movement_speed
-        if keys[pygame.K_RIGHT] and self.pos_x < 320:
+            print(f"self.pos_x: {self.pos_x}")
+        if keys[pygame.K_RIGHT] and self.pos_x <= 320:
             self.pos_x += self.movement_speed
-        if keys[pygame.K_UP] and self.pos_y > 192:
+        if keys[pygame.K_UP] and self.pos_y >= 192:
             self.pos_y -= self.movement_speed
-        if keys[pygame.K_DOWN] and self.pos_y < 320:
+        if keys[pygame.K_DOWN] and self.pos_y <= 320:
             self.pos_y += self.movement_speed
 
     def draw(self, window):
