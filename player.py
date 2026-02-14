@@ -1,4 +1,5 @@
 import pygame
+from pygame.key import ScancodeWrapper
 
 from entity import Entity
 
@@ -18,8 +19,7 @@ class Player(Entity):
         self.height = height
         self.movement_speed = movement_speed
 
-    def move(self):
-        keys = pygame.key.get_pressed()        
+    def move(self, keys: ScancodeWrapper):      
         if keys[pygame.K_LEFT] and self.pos_x > 192:
             self.pos_x -= self.movement_speed
         if keys[pygame.K_RIGHT] and self.pos_x < 320:

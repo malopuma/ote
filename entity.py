@@ -1,5 +1,6 @@
 # 
 import pygame
+from pygame.key import ScancodeWrapper
 
 
 class Entity:
@@ -8,7 +9,7 @@ class Entity:
         self.pos_y = pos_y
 
     # moves the entity
-    def move(self):
+    def move(self, keys: ScancodeWrapper):
         pass
         
     def draw(self, window):

@@ -2,9 +2,11 @@
 # building game centered on calm gameplay in a stunning, evolving landscape
 
 import pygame
-from entity import Entity
+
+#from entity import Entity
 from player import Player
-from map import Map
+from game_map import Map
+import positions_controller
 
 pygame.init()
 
@@ -32,6 +34,10 @@ map1 = Map([[1,0,1,0,1,0,1,0],
 
 map1.set_map_from_image("map2.png")
 
+# The position controller updates the positions of all the parts
+# of the game
+pos_controller = positions_controller.PosController(player, map1)
+
 run: bool = True
 
 # game loop
@@ -42,7 +48,7 @@ while run == True:
         if event.type == pygame.QUIT:
             run = False
 
-    player.move()
+    pos_controller.update()
     
     window.fill((0, 0, 0))
     map1.draw(window)

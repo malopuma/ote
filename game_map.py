@@ -1,6 +1,8 @@
 import pygame
+from pygame.key import ScancodeWrapper
 
 from tile import Tile
+import player
 
 class Map:
     def __init__(self, input_array):
@@ -17,10 +19,10 @@ class Map:
         for row_index, row in enumerate(self.input_array):
             for column_index, tile in enumerate(row):
                 if tile == 1:
-                    window.blit(self.gras_tile.image, (240 + column_index * (self.gras_tile.width / 2) - row_index * (self.gras_tile.width / 2),
-                                                  row_index * (self.gras_tile.height / 2) + column_index * (self.gras_tile.height / 2)))
+                    window.blit(self.gras_tile.image, (240 + column_index * (self.gras_tile.width / 2) - row_index * (self.gras_tile.width / 2) + self.offset[0],
+                                                  row_index * (self.gras_tile.height / 2) + column_index * (self.gras_tile.height / 2) + self.offset[1]))
                 elif tile == 0:
-                    window.blit(self.water_tile.image, (240 + column_index * (self.water_tile.width / 2) - row_index * (self.water_tile.width / 2),
+                    window.blit(self.water_tile.image, (240 + column_index * (self.water_tile.width / 2) - row_index * (self.water_tile.width / 2) + self.offset[0],
                                                   row_index * (self.water_tile.height / 2) + column_index * (self.water_tile.height / 2)))
 
     # set a tile value to change the map
@@ -55,4 +57,14 @@ class Map:
     def set_map_from_image(self, image_path):
         self.input_array = self.load_map_from_image(image_path)
 
+    def move(self, keys: ScancodeWrapper, player: player.Player):
+        if keys[pygame.K_LEFT] and player.pos_x > 192:
+            self.offset = (self.offset[0] - 10, self.offset[1])
+        if keys[pygame.K_RIGHT] and player.pos_x < 320:
+            self.offset = (self.offset[0] + 10, self.offset[1])    
+        if keys[pygame.K_UP] and player.pos_y > 192:        
+            self.offset = (self.offset[0], self.offset[1] - 10)
+        if keys[pygame.K_DOWN] and player.pos_y < 320:
+            self.offset = (self.offset[0], self.offset[1] + 10)
+        pass
 
