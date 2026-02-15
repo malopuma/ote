@@ -19,6 +19,9 @@ class Player(Entity):
         # Inherit from Entity
         super().__init__(position)
 
+        # The tile the player is currently on.
+        self.current_tile: list = self.get_current_tile([32, 32])
+
         # The position on the display window, where the player is actually drawn.
         self.drawing_pos: list = [256, 256]
 
