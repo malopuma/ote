@@ -22,7 +22,7 @@ velocity: int = 10
 
 clock = pygame.time.Clock()
 
-player = Player(256, 256, 8, 12, 10)
+player = Player([256, 256], 16, 20, 4)
 map1 = Map([[1,0,1,0,1,0,1,0],
             [0,1,0,1,0,1,0,1],
             [1,0,1,0,1,0,1,0],

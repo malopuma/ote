@@ -1,22 +1,20 @@
 # 
-import pygame
 from pygame.key import ScancodeWrapper
 
-
 class Entity:
-    def __init__(self, pos_x: int, pos_y: int):
-        self.pos_x = pos_x
-        self.pos_y = pos_y
-
-        self.map_position: list = [0, 0]
+    def __init__(self, position: list):
+        self.position = position
 
     # moves the entity
-    def move(self, keys: ScancodeWrapper):
+    def update_position(self, keys: ScancodeWrapper):
         pass
         
     def draw(self, window):
         pass
 
-    def get_position(self):
-        return (self.pos_x, self.pos_y)
+    def set_position(self, position: list):
+        self.position = position
+
+    def get_position(self) -> list:
+        return self.position
         

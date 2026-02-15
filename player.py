@@ -11,52 +11,60 @@ from entity import Entity
 class Player(Entity):
     def __init__(
         self,
-        pos_x: int,
-        pos_y: int,
+        position: list,
         width: int,
         height: int,
         movement_speed: int):
 
-        super().__init__(pos_x, pos_y)
+        # Inherit from Entity
+        super().__init__(position)
 
-        self.map_position[0] = 256
-        self.map_position[1] = 256
+        # The position on the display window, where the player is actually drawn.
+        self.drawing_pos: list = [256, 256]
+
         self.width = width
         self.height = height
         self.movement_speed = movement_speed
 
-    def move(self, keys: ScancodeWrapper):      
-        if keys[pygame.K_LEFT] and self.pos_x >= 192:
-            self.pos_x -= self.movement_speed
+        # Convert movement speed to movement interval for diagonal movement
+        self.movement_interval = int(round(math.sqrt((self.movement_speed*self.movement_speed) / 2)))
 
-            self.map_position[0] = self.map_position[0] - int(round(math.sqrt((self.movement_speed*self.movement_speed) / 2)))
-            self.map_position[1] = self.map_position[1] + int(round(math.sqrt((self.movement_speed*self.movement_speed) / 2)))
-            print(f"self.map_position: {self.map_position}")
 
-        if keys[pygame.K_RIGHT] and self.pos_x <= 320:
-            self.pos_x += self.movement_speed
+    def update_position(self, keys: ScancodeWrapper):      
+        if keys[pygame.K_LEFT]:
+            self.position[0], self.position[1] = self.position[0] - self.movement_interval, self.position[1] + self.movement_interval
+            
+        if keys[pygame.K_RIGHT]:
+            self.position[0], self.position[1] = self.position[0] + self.movement_interval, self.position[1] - self.movement_interval
 
-            self.map_position[0] = self.map_position[0] + int(round(math.sqrt((self.movement_speed*self.movement_speed) / 2)))
-            self.map_position[1] = self.map_position[1] - int(round(math.sqrt((self.movement_speed*self.movement_speed) / 2)))
-            print(f"self.map_position: {self.map_position}")
+        if keys[pygame.K_UP]:
+            self.position[0], self.position[1] = self.position[0] - self.movement_interval, self.position[1] - self.movement_interval
 
-        if keys[pygame.K_UP] and self.pos_y >= 192:
-            self.pos_y -= self.movement_speed
+        if keys[pygame.K_DOWN]:
+            self.position[0], self.position[1] = self.position[0] + self.movement_interval, self.position[1] + self.movement_interval
 
-            self.map_position[0] = self.map_position[0] - int(round(math.sqrt((self.movement_speed*self.movement_speed) / 2)))
-            self.map_position[1] = self.map_position[1] - int(round(math.sqrt((self.movement_speed*self.movement_speed) / 2)))
-            print(f"self.map_position: {self.map_position}")
+        print(f"self.position: {self.position}")
 
-        if keys[pygame.K_DOWN] and self.pos_y <= 320:
 
-            self.map_position[0] = self.map_position[0] + int(round(math.sqrt((self.movement_speed*self.movement_speed) / 2)))
-            self.map_position[1] = self.map_position[1] + int(round(math.sqrt((self.movement_speed*self.movement_speed) / 2)))
-            print(f"self.map_position: {self.map_position}")
+    def update_drawing_pos(self, keys: ScancodeWrapper):
+        if keys[pygame.K_LEFT] and self.drawing_pos[0] >= 192:
+            self.drawing_pos[0] -= self.movement_interval
 
-            self.pos_y += self.movement_speed
+        if keys[pygame.K_RIGHT] and self.drawing_pos[0] <= 320:
+            self.drawing_pos[0] += self.movement_interval
+    
+        if keys[pygame.K_UP] and self.drawing_pos[1] >= 192:
+            self.drawing_pos[1] -= self.movement_interval / 2
+            
+        if keys[pygame.K_DOWN] and self.drawing_pos[1] <= 320:
+            self.drawing_pos[1] += self.movement_interval / 2
+
+        print(f"self.drawing_pos: {self.drawing_pos}")
+
 
     def draw(self, window):
-        pygame.draw.rect(window, (255, 0, 0), (self.pos_x, self.pos_y, self.width, self.height))
+        pygame.draw.rect(window, (255, 0, 0), (self.drawing_pos[0], self.drawing_pos[1], self.width, self.height))
+
 
     def get_position(self):
-        return (self.pos_x, self.pos_y)
+        return (self.position)

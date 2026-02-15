@@ -58,13 +58,17 @@ class Map:
         self.input_array = self.load_map_from_image(image_path)
 
     def move(self, keys: ScancodeWrapper, player: player.Player):
-        if keys[pygame.K_LEFT] and player.pos_x < 192:
+        if keys[pygame.K_LEFT] and player.get_position()[0] < 192:
             self.offset = (self.offset[0] + 10, self.offset[1])
-        if keys[pygame.K_RIGHT] and player.pos_x > 320:
+        if keys[pygame.K_RIGHT] and player.get_position()[0] > 320:
             self.offset = (self.offset[0] - 10, self.offset[1])    
-        if keys[pygame.K_UP] and player.pos_y < 192:        
+        if keys[pygame.K_UP] and player.get_position()[1] < 192:        
             self.offset = (self.offset[0], self.offset[1] + 10)
-        if keys[pygame.K_DOWN] and player.pos_y > 320:
+        if keys[pygame.K_DOWN] and player.get_position()[1] > 320:
             self.offset = (self.offset[0], self.offset[1] - 10)
+        pass
+
+    def cache_map(self) -> pygame.Surface:
+        # Erstelle eine neue Oberfläche, um die Karte zu zeichnen
         pass
 

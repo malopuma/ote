@@ -17,7 +17,7 @@ class PosController:
         pass
 
     def update_player_pos(self, keys):
-        self.player.move(keys)
+        self.player.update_position(keys)
         pass
 
     def update_map_pos(self, keys):
