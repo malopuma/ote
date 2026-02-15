@@ -8,6 +8,8 @@ class Entity:
         self.pos_x = pos_x
         self.pos_y = pos_y
 
+        self.map_position: list = [0, 0]
+
     # moves the entity
     def move(self, keys: ScancodeWrapper):
         pass
